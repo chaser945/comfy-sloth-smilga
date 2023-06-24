@@ -42,6 +42,7 @@ const SidebarWrapper = styled.div`
     gap: 1.5em;
     background-color: white;
     transition: var(--transition);
+    z-index: 5;
   }
 
   .side-bar.inactive {

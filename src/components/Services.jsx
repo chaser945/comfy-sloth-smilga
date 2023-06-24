@@ -29,14 +29,16 @@ export default Services
 
 const Wrapper = styled.section`
   background-color: var(--clr-light-grunge);
+
   .services {
-    padding: 2em 1em;
+    padding: 2em 1em 5em 1em;
   }
 
   .text {
     color: var(--clr-dark-gray);
     margin-bottom: 4em;
   }
+
   .services-card-wrapper {
     display: grid;
     row-gap: 2em;
@@ -49,17 +51,20 @@ const Wrapper = styled.section`
       gap: 1em;
     }
   }
+
   @media (min-width: 800px) {
     .content {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1em;
     }
+  }
 
-    @media (min-width: 900px) {
-      .services-card-wrapper {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
+  @media (min-width: 900px) {
+    .services-card-wrapper {
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-bottom: -9em;
+      gap: 2em;
     }
   }
 `

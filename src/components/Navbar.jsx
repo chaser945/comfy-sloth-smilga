@@ -52,7 +52,7 @@ const NavContainer = styled.nav`
 
   .logo {
     font-family: "Righteous", sans-serif;
-    color: var(--clr-dark-gray);
+    color: var(--clr-dark-grunge);
   }
 
   .hamburger-wrapper {

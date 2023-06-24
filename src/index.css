@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Righteous&display=swap");
 
 :root {
+  --clr-body: #f1f5f8;
   --clr-dark-gray: #102a41;
   --clr-light-gray: #6e8aa0;
   --clr-light-grunge: #ffc3a1;
   --clr-slight-dark-grunge: #f0997d;
   --clr-dark-grunge: #d3756b;
   --clr-darkest-grunge: #a75d5d;
+  --clr-footer: #16141f;
   --transition: all linear 0.3s;
   --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.1);
   --shadow-dark: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -31,9 +33,15 @@ h4 {
 }
 
 p {
-  line-height: 1.8;
+  line-height: 2;
   color: var(--clr-light-gray);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+}
+
+@media (min-width: 850px) {
+  p {
+    font-size: 1rem;
+  }
 }
 
 img {
@@ -51,6 +59,10 @@ button {
   letter-spacing: 1px;
 }
 
+input:focus {
+  outline: none;
+}
+
 .section {
   max-width: 1100px;
   margin: 0 auto;
@@ -59,7 +71,7 @@ button {
 .btn {
   background-color: var(--clr-slight-dark-grunge);
   border: none;
-  padding: 0.5em 1em;
+  padding: 0.7em 1em;
   border-radius: 5px;
   color: white;
   cursor: pointer;
