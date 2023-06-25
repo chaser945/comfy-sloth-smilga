@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-const PageHero = ({ title }) => {
+const PageHero = ({ title, product }) => {
   return (
     <Wrapper>
       <h3 className="page-hero-title section">
         <Link to="/" className="home-link">
           Home{" "}
         </Link>
+        {product && (
+          <Link to="/products" className="product-link">
+            / Products{" "}
+          </Link>
+        )}
         / {title}{" "}
       </h3>
     </Wrapper>
@@ -23,13 +28,19 @@ const Wrapper = styled.article`
     padding: 1em;
     word-spacing: 4px;
     letter-spacing: 1px;
+    text-transform: capitalize;
   }
 
   .home-link {
     color: var(--clr-dark-grunge);
     transition: var(--transition);
   }
+
   .home-link:hover {
     color: var(--clr-dark-gray);
+  }
+
+  .product-link {
+    color: var(--clr-dark-grunge);
   }
 `

@@ -3,6 +3,9 @@ import {
   PRODUCTS_FETCH_BEGIN,
   PRODUCTS_FETCH_SUCCESS,
   PRODUCTS_FETCH_ERROR,
+  SINGLE_PRODUCT_FETCH_BEGIN,
+  SINGLE_PRODUCT_FETCH_SUCCESS,
+  SINGE_PRODUCT_FETCH_ERROR,
 } from "../actions"
 
 const productsReducer = (state, action) => {
@@ -27,7 +30,31 @@ const productsReducer = (state, action) => {
   }
 
   if (action.type === PRODUCTS_FETCH_ERROR) {
+    // console.log("error in fetching")
     return { ...state, productsLoading: false, productsError: true }
+  }
+
+  // SINGLE PRODUCT FETCH
+  // ==================
+
+  if (action.type === SINGLE_PRODUCT_FETCH_BEGIN) {
+    return { ...state, singleProductLoading: true, singleProductError: false }
+  }
+
+  if (action.type === SINGLE_PRODUCT_FETCH_SUCCESS) {
+    return {
+      ...state,
+      singleProductLoading: false,
+      singleProduct: action.payload.singleProduct,
+    }
+  }
+
+  if (action.type === SINGE_PRODUCT_FETCH_ERROR) {
+    return {
+      ...state,
+      singleProductLoading: false,
+      singleProductError: true,
+    }
   }
 
   return state

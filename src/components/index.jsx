@@ -6,6 +6,9 @@ import HomeHero from "./HomeHero"
 import FeaturedProducts from "./FeaturedProducts"
 import Services from "./Services"
 import NewsLetter from "./NewsLetter"
+import SingleProductImgWrapper from "./SingleProductImgWrapper"
+import RatingStars from "./RatingStars"
+import CartComp from "./CartComp"
 
 export {
   Navbar,
@@ -16,4 +19,7 @@ export {
   FeaturedProducts,
   Services,
   NewsLetter,
+  SingleProductImgWrapper,
+  RatingStars,
+  CartComp,
 }

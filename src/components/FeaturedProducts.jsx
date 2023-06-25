@@ -1,8 +1,31 @@
 import { useProductsContext } from "../context/productsContext"
 import styled from "styled-components"
+import { formatPrice } from "../utils/helpers"
+import LoadingSpin from "./LoadingSpin"
+import { Link } from "react-router-dom"
 
 const FeaturedProducts = () => {
-  const { featuredProducts } = useProductsContext()
+  const { featuredProducts, productsLoading, productsError } =
+    useProductsContext()
+  if (productsLoading) {
+    return (
+      <Wrapper>
+        <div className="section loading">
+          <LoadingSpin />
+        </div>
+      </Wrapper>
+    )
+  }
+  if (productsError) {
+    return (
+      <Wrapper>
+        <div className="section error">
+          <h1 className="alert-heading">Failed to fetch the resources!</h1>
+          <p className="alert-p">Try again later</p>
+        </div>
+      </Wrapper>
+    )
+  }
   return (
     <Wrapper>
       <div className="featured-products section">
@@ -12,19 +35,24 @@ const FeaturedProducts = () => {
           {featuredProducts.slice(0, 3).map((product) => {
             const { id, image, name, price } = product
             return (
-              <article className="card" key={id}>
-                <div className="content">
-                  <p className="name">{name}</p>
-                  <p className="price">${price}</p>
-                </div>
-                <div className="img-wrapper">
-                  <img className="card-img" src={image} alt={name} />
-                  <div className="img-overlay"></div>
-                </div>
-              </article>
+              <Link to={`/products/${id}`} key={id}>
+                <article className="card">
+                  <div className="content">
+                    <p className="name">{name}</p>
+                    <p className="price">{formatPrice(price)}</p>
+                  </div>
+                  <div className="img-wrapper">
+                    <img className="card-img" src={image} alt={name} />
+                    <div className="img-overlay"></div>
+                  </div>
+                </article>
+              </Link>
             )
           })}
         </div>
+        <Link to="/products">
+          <button className="btn btn-products">all products</button>
+        </Link>
       </div>
     </Wrapper>
   )
@@ -127,5 +155,43 @@ const Wrapper = styled.section`
 
   .price {
     color: var(--clr-dark-grunge);
+  }
+
+  .btn-products {
+    text-transform: uppercase;
+    margin-top: 3em;
+    margin-bottom: 2em;
+  }
+
+  // =========
+  // ERROR
+  // ==========
+
+  .error {
+    padding: 2em 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .alert-heading {
+    color: red;
+    margin-bottom: 0.1em;
+  }
+
+  .alert-p {
+    color: red;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  // ===========
+  // LOADING
+  // ===========
+
+  .loading {
+    padding: 2em 1em;
   }
 `
