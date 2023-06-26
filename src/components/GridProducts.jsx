@@ -35,7 +35,7 @@ export default GridProducts
 
 const Wrapper = styled.div`
   .grid-products {
-    padding: 1em;
+    padding: 2em 1em;
     display: grid;
     gap: 1em;
   }

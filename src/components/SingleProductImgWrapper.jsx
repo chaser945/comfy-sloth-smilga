@@ -32,15 +32,15 @@ const SingleProductImgWrapper = ({ images = [{}] }) => {
 export default SingleProductImgWrapper
 
 const Wrapper = styled.div`
+  .img-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .main-img {
     height: 300px;
     object-fit: cover;
-  }
-
-  @media (min-width: 900px) {
-    .main-img {
-      height: 550px;
-    }
   }
 
   .img-gallery {
@@ -54,11 +54,21 @@ const Wrapper = styled.div`
     transition: all linear 0.1s;
     cursor: pointer;
     max-height: 50px;
+    max-width: 80px;
     object-fit: cover;
   }
 
   .small-img.active {
     transform: scale(0.92);
     border: 1px solid var(--clr-dark-grunge);
+  }
+
+  @media (min-width: 900px) {
+    .main-img {
+      height: 550px;
+    }
+    .img-gallery {
+      gap: 1em;
+    }
   }
 `

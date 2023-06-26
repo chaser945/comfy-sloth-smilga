@@ -6,6 +6,7 @@ const filterReducer = (state, action) => {
       ...state,
       filteredProducts: [...action.payload.products],
       allProducts: [...action.payload.products],
+      filterLoading: false,
     }
   }
 }

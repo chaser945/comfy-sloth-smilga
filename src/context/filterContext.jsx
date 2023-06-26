@@ -6,6 +6,7 @@ import reducer from "../reducers/filterReducer"
 const FilterContext = createContext()
 
 const initialState = {
+  filterLoading: true,
   filteredProducts: [],
   allProducts: [],
   showGrid: true,

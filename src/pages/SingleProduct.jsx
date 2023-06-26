@@ -218,7 +218,11 @@ const Wrapper = styled.section`
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3em;
-      align-items: center;
+      // align-items: center;
+    }
+
+    .title {
+      margin-top: 0;
     }
 
     .info {
