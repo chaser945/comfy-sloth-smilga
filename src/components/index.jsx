@@ -8,7 +8,12 @@ import Services from "./Services"
 import NewsLetter from "./NewsLetter"
 import SingleProductImgWrapper from "./SingleProductImgWrapper"
 import RatingStars from "./RatingStars"
-import CartComp from "./CartComp"
+import AddToCart from "./AddToCart"
+import FilterProducts from "./FilterProducts"
+import SortProducts from "./SortProducts"
+import PreviewProducts from "./PreviewProducts"
+import GridProducts from "./GridProducts"
+import ListProducts from "./ListProducts"
 
 export {
   Navbar,
@@ -21,5 +26,10 @@ export {
   NewsLetter,
   SingleProductImgWrapper,
   RatingStars,
-  CartComp,
+  AddToCart,
+  FilterProducts,
+  SortProducts,
+  PreviewProducts,
+  GridProducts,
+  ListProducts,
 }

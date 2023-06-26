@@ -35,7 +35,7 @@ const ProductsProvider = ({ children }) => {
     dispatch({ type: PRODUCTS_FETCH_BEGIN })
     try {
       const response = await axios.get(url)
-      console.log(response.data)
+      // console.log(response.data)
       dispatch({
         type: PRODUCTS_FETCH_SUCCESS,
         payload: { products: response.data },
@@ -51,7 +51,7 @@ const ProductsProvider = ({ children }) => {
     try {
       const response = await axios.get(url)
       const singleProduct = response.data
-      console.log(singleProduct)
+      // console.log(singleProduct)
       dispatch({
         type: SINGLE_PRODUCT_FETCH_SUCCESS,
         payload: { singleProduct },

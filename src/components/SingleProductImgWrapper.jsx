@@ -39,7 +39,7 @@ const Wrapper = styled.div`
 
   @media (min-width: 900px) {
     .main-img {
-      height: 400px;
+      height: 550px;
     }
   }
 
@@ -53,6 +53,8 @@ const Wrapper = styled.div`
   .small-img {
     transition: all linear 0.1s;
     cursor: pointer;
+    max-height: 50px;
+    object-fit: cover;
   }
 
   .small-img.active {

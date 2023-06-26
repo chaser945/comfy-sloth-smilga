@@ -8,7 +8,7 @@ import {
   PageHero,
   RatingStars,
   SingleProductImgWrapper,
-  CartComp,
+  AddToCart,
 } from "../components"
 import { formatPrice } from "../utils/helpers"
 
@@ -86,6 +86,8 @@ const SingleProduct = () => {
     price,
     stock,
     images,
+    stars,
+    reviews,
   } = singleProduct
 
   return (
@@ -99,7 +101,7 @@ const SingleProduct = () => {
           <SingleProductImgWrapper images={images} />
           <div className="content">
             <h1 className="title">{name}</h1>
-            <RatingStars />
+            <RatingStars stars={stars} reviews={reviews} />
             <p className="price">{formatPrice(price)}</p>
             <p className="description">{description}</p>
             <p className="info">
@@ -112,7 +114,8 @@ const SingleProduct = () => {
               Brand : <span>{company}</span>
             </p>
             <div className="line"></div>
-            <CartComp />
+
+            {stock > 0 && <AddToCart singleProduct={singleProduct} />}
           </div>
         </div>
       </div>
@@ -123,6 +126,8 @@ const SingleProduct = () => {
 export default SingleProduct
 
 const Wrapper = styled.section`
+  min-height: calc(100vh - 10rem);
+
   .loading {
     padding: 3em 1em;
     height: calc(100vh - 10rem);
@@ -173,6 +178,7 @@ const Wrapper = styled.section`
 
   .title {
     text-transform: capitalize;
+    margin-bottom: 0;
   }
 
   .price {
@@ -180,6 +186,7 @@ const Wrapper = styled.section`
     letter-spacing: 2px;
     color: var(--clr-dark-grunge);
     font-size: 1rem;
+    margin: 0.3em;
   }
 
   .info {
@@ -201,15 +208,17 @@ const Wrapper = styled.section`
   }
 
   .product-wrapper {
+    display: grid;
+    gap: 2em;
     margin-top: 3em;
   }
 
   @media (min-width: 1000px) {
     .product-wrapper {
       display: grid;
-      grid-template-columns: 1fr 1.3fr;
-      gap: 2em;
-      place-items: center;
+      grid-template-columns: 1fr 1fr;
+      gap: 3em;
+      align-items: center;
     }
 
     .info {

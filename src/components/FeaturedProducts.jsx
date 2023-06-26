@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { formatPrice } from "../utils/helpers"
 import LoadingSpin from "./LoadingSpin"
 import { Link } from "react-router-dom"
+import { FaSearch } from "react-icons/fa"
 
 const FeaturedProducts = () => {
   const { featuredProducts, productsLoading, productsError } =
@@ -43,7 +44,9 @@ const FeaturedProducts = () => {
                   </div>
                   <div className="img-wrapper">
                     <img className="card-img" src={image} alt={name} />
-                    <div className="img-overlay"></div>
+                    <div className="img-overlay">
+                      <FaSearch className="search-icon" />
+                    </div>
                   </div>
                 </article>
               </Link>
@@ -129,10 +132,18 @@ const Wrapper = styled.section`
     bottom: 0;
     opacity: 0;
     transition: var(--transition);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .img-overlay:hover {
     opacity: 1;
+  }
+
+  .search-icon {
+    color: white;
+    font-size: 1.5rem;
   }
 
   .card-img {
