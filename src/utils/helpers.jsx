@@ -1,10 +1,13 @@
-export const getUniqueValues = (data, type) => {
-  let unique = data.map((item) => item[type])
+export const uniqueValues = (data, type) => {
+  let allValues = data.map((item) => item[type])
+  // console.log(allValues)
   if (type === "colors") {
-    unique = unique.flat()
+    allValues = allValues.flat()
+    // console.log(allValues)
   }
-
-  return ["all", ...new Set(unique)]
+  const uniqueValues = [...new Set(allValues)]
+  console.log(uniqueValues)
+  return uniqueValues
 }
 
 export const formatPrice = (price) => {

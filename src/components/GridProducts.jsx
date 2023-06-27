@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { FaSearch } from "react-icons/fa"
 
 const GridProducts = ({ filteredProducts }) => {
-  console.log(filteredProducts)
+  // console.log(filteredProducts)
   return (
     <Wrapper>
       <div className="grid-products">

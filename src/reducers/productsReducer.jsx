@@ -57,8 +57,6 @@ const productsReducer = (state, action) => {
     }
   }
 
-  return state
-
   throw new Error(`${action.type} is not handled in the reducer.`)
 }
 export default productsReducer
