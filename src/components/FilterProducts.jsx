@@ -1,15 +1,17 @@
 import styled from "styled-components"
 import { useFilterContext } from "../context/filterContext"
-import { uniqueValues } from "../utils/helpers"
+import { formatPrice, uniqueValues } from "../utils/helpers"
 import { FaCheck } from "react-icons/fa"
 
 const FilterProducts = () => {
-  const { allProducts, handleFilterChange, filters } = useFilterContext()
-  console.log(allProducts)
+  const { allProducts, handleFilterChange, filters, clearFilter } =
+    useFilterContext()
+  // console.log(allProducts)
   const categories = ["all", ...uniqueValues(allProducts, "category")]
   const companies = ["all", ...uniqueValues(allProducts, "company")]
   const uniqueColors = ["all", ...uniqueValues(allProducts, "colors")]
-  const { query, category, company, color, price, freeShipping } = filters
+  const { query, category, company, color, price, maxPrice, freeShipping } =
+    filters
   // console.log(query)
   return (
     <Wrapper>
@@ -95,6 +97,36 @@ const FilterProducts = () => {
               })}
             </div>
           </div>
+          {/*START OF PRICE */}
+          <div className="price">
+            <h4 className="price-title">Price</h4>
+            <p className="price-display">{formatPrice(price)}</p>
+            <input
+              name="price"
+              type="range"
+              min="0"
+              max={maxPrice}
+              value={price}
+              onChange={handleFilterChange}
+            />
+          </div>
+          {/* START OF FREE SHIPPING */}
+          <div className="shipping">
+            <label htmlFor="free-shipping" className="free-shipping">
+              Free Shipping
+            </label>
+            <input
+              name="freeShipping"
+              id="free-shipping"
+              type="checkbox"
+              checked={freeShipping}
+              onChange={handleFilterChange}
+            />
+          </div>
+          {/* START OF CLEAR FILTERS */}
+          <button className="btn clear-filter" onClick={clearFilter}>
+            clear filters
+          </button>
         </form>
       </div>
     </Wrapper>
@@ -206,5 +238,40 @@ const Wrapper = styled.div`
   .check-icon {
     color: white;
     font-size: 0.7rem;
+  }
+
+  .price {
+    margin-top: 0em;
+  }
+
+  .price-title {
+    margin-bottom: 0.2em;
+    // background-color: magenta;
+  }
+
+  .price-display {
+    margin: 0.2em;
+    font-size: 0.8rem;
+  }
+
+  .shipping {
+    margin-top: 1em;
+  }
+
+  .free-shipping {
+    color: var(--clr-light-gray);
+    font-size: 0.9rem;
+  }
+
+  .clear-filter {
+    margin-top: 1.5em;
+    background-color: var(--clr-darkest-grunge);
+    text-transform: capitalize;
+    padding: 0.5em;
+    font-family: inherit;
+  }
+
+  .clear-filter:hover {
+    background-color: var(--clr-dark-gray);
   }
 `

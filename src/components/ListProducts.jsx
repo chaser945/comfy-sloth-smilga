@@ -32,6 +32,8 @@ const ListProducts = ({ filteredProducts }) => {
 export default ListProducts
 
 const Wrapper = styled.section`
+  min-height: calc(100vh - 30rem);
+
   .list-products {
     display: grid;
     gap: 3.5em;

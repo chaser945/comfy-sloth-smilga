@@ -30,6 +30,9 @@ export default About
 
 const Wrapper = styled.section`
   min-height: calc(100vh - 20rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .about-page {
     padding: 3em 1em;

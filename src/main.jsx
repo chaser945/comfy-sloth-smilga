@@ -4,11 +4,14 @@ import App from "./App.jsx"
 import "./index.css"
 import { ProductsProvider } from "./context/productsContext"
 import { FilterProvider } from "./context/filterContext"
+import { CartProvider } from "./context/cartContext"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ProductsProvider>
     <FilterProvider>
-      <App />
+      <CartProvider>
+        <App />
+      </CartProvider>
     </FilterProvider>
   </ProductsProvider>
 )

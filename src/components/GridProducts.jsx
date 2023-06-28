@@ -34,6 +34,8 @@ const GridProducts = ({ filteredProducts }) => {
 export default GridProducts
 
 const Wrapper = styled.div`
+  min-height: calc(100vh - 30rem);
+
   .grid-products {
     padding: 2em 1em;
     display: grid;

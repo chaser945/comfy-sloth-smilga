@@ -28,7 +28,11 @@ const PreviewProducts = () => {
 export default PreviewProducts
 
 const Wrapper = styled.div`
+  min-height: calc(100vh - 31rem);
   .apology {
     color: var(--clr-dark-gray);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.6;
   }
 `

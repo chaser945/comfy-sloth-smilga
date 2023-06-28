@@ -5,15 +5,25 @@ import {
   SORT_PRODUCTS,
   SET_SORT,
   SET_FILTER,
+  CLEAR_FILTER,
+  FILTER_PRODUCTS,
 } from "../actions"
 
 const filterReducer = (state, action) => {
   if (action.type === PRODUCTS_LOAD) {
+    const priceArr = action.payload.products.map((c) => c.price)
+    const maxPrice = Math.max(...priceArr)
+    // console.log(maxPrice)
     return {
       ...state,
       filteredProducts: [...action.payload.products],
       allProducts: [...action.payload.products],
       filterLoading: false,
+      filters: {
+        ...state.filters,
+        maxPrice,
+        price: maxPrice,
+      },
     }
   }
 
@@ -68,7 +78,56 @@ const filterReducer = (state, action) => {
     }
   }
 
-  return { ...state }
+  if (action.type === CLEAR_FILTER) {
+    return {
+      ...state,
+      filteredProducts: [...state.allProducts],
+      filters: {
+        ...state.filters,
+        query: "",
+        category: "all",
+        company: "all",
+        color: "all",
+        price: state.filters.maxPrice,
+        freeShipping: false,
+      },
+    }
+  }
+
+  if (action.type === FILTER_PRODUCTS) {
+    let tempProducts = [...state.allProducts]
+    // console.log(tempProducts)
+
+    const { query, category, company, color, price, freeShipping } =
+      state.filters
+    // console.log(category)
+    if (query) {
+      tempProducts = tempProducts.filter((c) => c.name.startsWith(query))
+    }
+    if (category !== "all") {
+      tempProducts = tempProducts.filter((c) => c.category === category)
+    }
+    if (company !== "all") {
+      tempProducts = tempProducts.filter((c) => c.company === company)
+    }
+    if (color !== "all") {
+      tempProducts = tempProducts.filter(
+        (c) => c.colors.find((ele) => ele === color) === color
+      )
+    }
+    if (freeShipping) {
+      tempProducts = tempProducts.filter((c) => c.shipping === true)
+    }
+
+    tempProducts = tempProducts.filter((c) => c.price <= price)
+
+    return {
+      ...state,
+      filteredProducts: tempProducts,
+    }
+  }
+
+  // return { ...state }
 
   throw new Error(`${action.type} was not found in the reducer`)
 }

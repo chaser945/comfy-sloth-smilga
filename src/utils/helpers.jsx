@@ -6,7 +6,7 @@ export const uniqueValues = (data, type) => {
     // console.log(allValues)
   }
   const uniqueValues = [...new Set(allValues)]
-  console.log(uniqueValues)
+  // console.log(uniqueValues)
   return uniqueValues
 }
 

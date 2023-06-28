@@ -7,6 +7,8 @@ import {
   SORT_PRODUCTS,
   SET_SORT,
   SET_FILTER,
+  CLEAR_FILTER,
+  FILTER_PRODUCTS,
 } from "../actions"
 import reducer from "../reducers/filterReducer"
 
@@ -22,8 +24,9 @@ const initialState = {
     query: "",
     category: "all",
     company: "all",
-    color: "",
+    color: "all",
     price: 0,
+    maxPrice: 0,
     freeShipping: false,
   },
 }
@@ -38,8 +41,9 @@ const FilterProvider = ({ children }) => {
 
   useEffect(() => {
     // console.log(state.sort)
+    dispatch({ type: FILTER_PRODUCTS })
     dispatch({ type: SORT_PRODUCTS })
-  }, [state.sort, products])
+  }, [state.sort, products, state.filters])
 
   const setGridView = () => {
     dispatch({ type: SET_GRID_VIEW })
@@ -64,7 +68,17 @@ const FilterProvider = ({ children }) => {
     if (name === "color") {
       value = e.target.dataset.color
     }
+    if (name === "freeShipping") {
+      value = e.target.checked
+    }
+    if (name === "price") {
+      value = Number(e.target.value)
+    }
     dispatch({ type: SET_FILTER, payload: { name, value } })
+  }
+
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER })
   }
 
   return (
@@ -75,6 +89,7 @@ const FilterProvider = ({ children }) => {
         setListView,
         handleChange,
         handleFilterChange,
+        clearFilter,
       }}
     >
       {children}
