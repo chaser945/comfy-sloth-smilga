@@ -1,9 +1,16 @@
-import { ADD_TO_CART } from "../actions"
+import {
+  ADD_TO_CART,
+  CALC_SUBTOTAL,
+  CLEAR_CART,
+  REMOVE_PRODUCT,
+  TOGGLE_AMOUNT,
+} from "../actions"
 
 const cartReducer = (state, action) => {
   if (action.type === ADD_TO_CART) {
     // console.log("action working")
-    const { id, name, mainColor, price, itemAmount, url } = action.payload
+    const { id, name, mainColor, price, itemAmount, url, stock } =
+      action.payload
     const uniqueId = id + mainColor
     // console.log(uniqueId)
     const alreadyAddedItem = state.cart.find((c) => c.id === uniqueId)
@@ -16,7 +23,10 @@ const cartReducer = (state, action) => {
           ...state.cart.filter((c) => c.id !== uniqueId),
           {
             ...alreadyAddedItem,
-            itemAmount: itemAmount + alreadyAddedItem.itemAmount,
+            itemAmount:
+              itemAmount >= stock
+                ? stock
+                : itemAmount + alreadyAddedItem.itemAmount,
           },
         ],
       }
@@ -26,8 +36,79 @@ const cartReducer = (state, action) => {
       ...state,
       cart: [
         ...state.cart,
-        { id: uniqueId, name, color: mainColor, price, itemAmount, url },
+        {
+          id: uniqueId,
+          name,
+          color: mainColor,
+          price,
+          itemAmount,
+          url,
+          stock,
+        },
       ],
+    }
+  }
+
+  if (action.type === CLEAR_CART) {
+    return {
+      ...state,
+      cart: [],
+    }
+  }
+
+  if (action.type === REMOVE_PRODUCT) {
+    return {
+      ...state,
+      cart: state.cart.filter((c) => c.id !== action.payload.id),
+    }
+  }
+
+  if (action.type === TOGGLE_AMOUNT) {
+    if (action.payload.func === "dec") {
+      return {
+        ...state,
+        cart: state.cart.map((c) => {
+          if (c.id === action.payload.id) {
+            return {
+              ...c,
+              itemAmount: c.itemAmount === 1 ? c.itemAmount : c.itemAmount - 1,
+            }
+          } else {
+            return {
+              ...c,
+            }
+          }
+        }),
+      }
+    }
+    if (action.payload.func === "inc") {
+      return {
+        ...state,
+        cart: state.cart.map((c) => {
+          if (c.id === action.payload.id) {
+            return {
+              ...c,
+              itemAmount:
+                c.itemAmount === c.stock ? c.itemAmount : c.itemAmount + 1,
+            }
+          } else {
+            return {
+              ...c,
+            }
+          }
+        }),
+      }
+    }
+  }
+
+  if (action.type === CALC_SUBTOTAL) {
+    const tempSubTotal = state.cart.reduce((acc, curr) => {
+      acc = acc + curr.price * curr.itemAmount
+      return acc
+    }, 0)
+    return {
+      ...state,
+      subTotal: tempSubTotal,
     }
   }
 

@@ -1,16 +1,20 @@
 import styled from "styled-components"
 import { useProductsContext } from "../context/productsContext"
+import { Link } from "react-router-dom"
 
 const NavIcons = () => {
   const { toggleSidebar } = useProductsContext()
   return (
     <NavIconsWrapper className="nav-icons-wrapper">
       <div className="nav-icons">
-        <span className="cart" onClick={toggleSidebar}>
-          <p>cart</p>
-          <i className="fa-solid fa-cart-shopping"></i>
-          <span className="cart-items-num">13</span>
-        </span>
+        <Link to="/cart">
+          <span className="cart" onClick={toggleSidebar}>
+            <p>cart</p>
+            <i className="fa-solid fa-cart-shopping"></i>
+
+            <span className="cart-items-num">13</span>
+          </span>
+        </Link>
         <span className="user" onClick={toggleSidebar}>
           <p>login</p>
           <i className="fa-solid fa-user-plus"></i>

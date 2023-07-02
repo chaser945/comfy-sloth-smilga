@@ -115,7 +115,11 @@ const SingleProduct = () => {
             </p>
             <div className="line"></div>
 
-            {stock > 0 && <AddToCart singleProduct={singleProduct} />}
+            {stock > 0 ? (
+              <AddToCart singleProduct={singleProduct} />
+            ) : (
+              <h3>Out of Stock</h3>
+            )}
           </div>
         </div>
       </div>
