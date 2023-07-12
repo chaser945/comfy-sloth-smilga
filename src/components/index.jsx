@@ -14,6 +14,7 @@ import SortProducts from "./SortProducts"
 import PreviewProducts from "./PreviewProducts"
 import GridProducts from "./GridProducts"
 import ListProducts from "./ListProducts"
+import PrivateRouteCheckout from "./PrivateRouteCheckout"
 
 export {
   Navbar,
@@ -32,4 +33,5 @@ export {
   PreviewProducts,
   GridProducts,
   ListProducts,
+  PrivateRouteCheckout,
 }

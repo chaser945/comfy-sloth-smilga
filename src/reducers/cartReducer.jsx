@@ -4,6 +4,7 @@ import {
   CLEAR_CART,
   REMOVE_PRODUCT,
   TOGGLE_AMOUNT,
+  CALC_TOTAL_ITEMS,
 } from "../actions"
 
 const cartReducer = (state, action) => {
@@ -109,6 +110,17 @@ const cartReducer = (state, action) => {
     return {
       ...state,
       subTotal: tempSubTotal,
+    }
+  }
+
+  if (action.type === CALC_TOTAL_ITEMS) {
+    const tempTotalItems = state.cart.reduce((acc, curr) => {
+      acc = curr.itemAmount + acc
+      return acc
+    }, 0)
+    return {
+      ...state,
+      totalItems: tempTotalItems,
     }
   }
 

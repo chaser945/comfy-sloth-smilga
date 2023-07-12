@@ -3,8 +3,10 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import NavIcons from "./NavIcons"
 import { useProductsContext } from "../context/productsContext"
+import { useUserContext } from "../context/UserContext"
 const Sidebar = () => {
   const { showSidebar, toggleSidebar } = useProductsContext()
+  const { myUser } = useUserContext()
   return (
     <SidebarWrapper>
       <div className={showSidebar ? "side-bar" : "side-bar inactive"}>
@@ -19,6 +21,13 @@ const Sidebar = () => {
               </Link>
             )
           })}
+          {myUser && (
+            <Link key="checkout" to="/checkout">
+              <li className="nav-link" onClick={toggleSidebar}>
+                checkout
+              </li>
+            </Link>
+          )}
         </ul>
         <NavIcons />
       </div>

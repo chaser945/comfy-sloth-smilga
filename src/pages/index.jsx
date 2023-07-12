@@ -4,5 +4,6 @@ import Home from "./Home"
 import Products from "./Products"
 import SingleProduct from "./SingleProduct"
 import Cart from "./Cart"
+import Checkout from "./Checkout"
 
-export { About, Error, Home, Products, SingleProduct, Cart }
+export { About, Error, Home, Products, SingleProduct, Cart, Checkout }

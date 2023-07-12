@@ -3,9 +3,11 @@ import { Link } from "react-router-dom"
 import { links } from "../utils/constants"
 import NavIcons from "./NavIcons"
 import { useProductsContext } from "../context/productsContext"
+import { useUserContext } from "../context/UserContext"
 
 const Navbar = () => {
   const { showSidebar, toggleSidebar } = useProductsContext()
+  const { myUser } = useUserContext()
   return (
     <NavContainer>
       <div className="nav-center section">
@@ -26,6 +28,11 @@ const Navbar = () => {
               </Link>
             )
           })}
+          {myUser && (
+            <Link key="checkout" to="/checkout">
+              <li>checkout</li>
+            </Link>
+          )}
         </ul>
         <NavIcons />
       </div>

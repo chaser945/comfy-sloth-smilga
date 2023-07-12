@@ -1,7 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-import { Home, About, Error, Products, SingleProduct, Cart } from "./pages"
-import { Navbar, Sidebar, Footer } from "./components"
+import {
+  Home,
+  About,
+  Error,
+  Products,
+  SingleProduct,
+  Cart,
+  Checkout,
+} from "./pages"
+import { Navbar, Sidebar, Footer, PrivateRouteCheckout } from "./components"
 
 const App = () => {
   return (
@@ -14,6 +22,14 @@ const App = () => {
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRouteCheckout>
+              <Checkout />
+            </PrivateRouteCheckout>
+          }
+        />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />

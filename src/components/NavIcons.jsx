@@ -1,9 +1,13 @@
 import styled from "styled-components"
 import { useProductsContext } from "../context/productsContext"
 import { Link } from "react-router-dom"
+import { useUserContext } from "../context/UserContext"
+import { useCartContext } from "../context/cartContext"
 
 const NavIcons = () => {
   const { toggleSidebar } = useProductsContext()
+  const { logout, loginWithRedirect, myUser, user } = useUserContext()
+  const { totalItems } = useCartContext()
   return (
     <NavIconsWrapper className="nav-icons-wrapper">
       <div className="nav-icons">
@@ -12,13 +16,33 @@ const NavIcons = () => {
             <p>cart</p>
             <i className="fa-solid fa-cart-shopping"></i>
 
-            <span className="cart-items-num">13</span>
+            <span className="cart-items-num">{totalItems}</span>
           </span>
         </Link>
-        <span className="user" onClick={toggleSidebar}>
-          <p>login</p>
-          <i className="fa-solid fa-user-plus"></i>
-        </span>
+
+        {myUser ? (
+          <span
+            className="user"
+            onClick={() => {
+              toggleSidebar()
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }}
+          >
+            <p>logout</p>
+            <img className="logout-pic" src={user.picture} alt={user.name} />
+          </span>
+        ) : (
+          <span
+            className="user"
+            onClick={() => {
+              toggleSidebar()
+              loginWithRedirect()
+            }}
+          >
+            <p>login</p>
+            <i className="fa-solid fa-user-plus"></i>
+          </span>
+        )}
       </div>
     </NavIconsWrapper>
   )
@@ -58,5 +82,15 @@ const NavIconsWrapper = styled.div`
     color: white;
     font-size: 0.8rem;
     padding: 0.18em;
+    display: flex;
+    width: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logout-pic {
+    width: 20px;
+    object-fit: cover;
+    border-radius: 50%;
   }
 `

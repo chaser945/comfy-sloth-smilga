@@ -6,6 +6,7 @@ import {
   REMOVE_PRODUCT,
   TOGGLE_AMOUNT,
   CALC_SUBTOTAL,
+  CALC_TOTAL_ITEMS,
 } from "../actions"
 import reducer from "../reducers/cartReducer"
 
@@ -24,6 +25,7 @@ const initialState = {
   cart: parseCart(),
   subTotal: 0,
   shippingFee: 534,
+  totalItems: 0,
 }
 
 const CartProvider = ({ children }) => {
@@ -32,6 +34,7 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(state.cart))
     dispatch({ type: CALC_SUBTOTAL })
+    dispatch({ type: CALC_TOTAL_ITEMS })
   }, [state.cart])
 
   const addItemToCart = (

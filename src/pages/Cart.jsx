@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import PageHero from "../components/PageHero"
 import { formatPrice } from "../utils/helpers"
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa"
+import { useUserContext } from "../context/UserContext"
 
 const Cart = () => {
   const {
@@ -14,8 +15,10 @@ const Cart = () => {
     subTotal,
     shippingFee,
   } = useCartContext()
-  console.log(cart)
-  console.log("cart page render")
+  // console.log(cart)
+  // console.log("cart page render")
+
+  const { myUser, loginWithRedirect } = useUserContext()
 
   if (cart.length < 1) {
     return (
@@ -104,6 +107,7 @@ const Cart = () => {
           </button>
         </div>
 
+        {/* ITEM TOTAL */}
         <div className="total-wrapper">
           <h3 className="subtotal-last">
             Subtotal: <span>{formatPrice(subTotal)}</span>
@@ -116,6 +120,15 @@ const Cart = () => {
             Order Total: <span>{formatPrice(shippingFee + subTotal)}</span>
           </h2>
         </div>
+        {myUser ? (
+          <button className="btn checkout-btn">
+            <Link to="/checkout">proceed to checkout</Link>
+          </button>
+        ) : (
+          <button className="btn login-btn" onClick={() => loginWithRedirect()}>
+            login
+          </button>
+        )}
       </div>
     </Wrapper>
   )
@@ -292,10 +305,26 @@ const Wrapper = styled.section`
   .total-wrapper {
     max-width: 500px;
     margin-top: 2em;
+    margin-bottom: 1em;
     border-radius: 5px;
     border: 1px solid var(--clr-light-gray);
     padding: 1em 3em;
     // background-color: magenta;
+  }
+
+  .login-btn,
+  .checkout-btn {
+    text-transform: capitalize;
+    background-color: var(--clr-dark-grunge);
+    transition: var(--transition);
+    width: 100%;
+    max-width: 500px;
+    text-transform: uppercase;
+  }
+
+  .login-btn:hover,
+  .checkout-btn:hover {
+    background-color: var(--clr-darkest-grunge);
   }
 
   // ================
