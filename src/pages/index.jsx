@@ -5,5 +5,15 @@ import Products from "./Products"
 import SingleProduct from "./SingleProduct"
 import Cart from "./Cart"
 import Checkout from "./Checkout"
+import AuthWrapper from "./AuthWrapper"
 
-export { About, Error, Home, Products, SingleProduct, Cart, Checkout }
+export {
+  About,
+  Error,
+  Home,
+  Products,
+  SingleProduct,
+  Cart,
+  Checkout,
+  AuthWrapper,
+}

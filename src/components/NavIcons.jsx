@@ -7,7 +7,7 @@ import { useCartContext } from "../context/cartContext"
 const NavIcons = () => {
   const { toggleSidebar } = useProductsContext()
   const { logout, loginWithRedirect, myUser, user } = useUserContext()
-  const { totalItems } = useCartContext()
+  const { totalItems, clearCart } = useCartContext()
   return (
     <NavIconsWrapper className="nav-icons-wrapper">
       <div className="nav-icons">
@@ -24,6 +24,7 @@ const NavIcons = () => {
           <span
             className="user"
             onClick={() => {
+              clearCart()
               toggleSidebar()
               logout({ logoutParams: { returnTo: window.location.origin } })
             }}

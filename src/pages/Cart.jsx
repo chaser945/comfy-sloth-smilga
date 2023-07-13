@@ -121,9 +121,9 @@ const Cart = () => {
           </h2>
         </div>
         {myUser ? (
-          <button className="btn checkout-btn">
-            <Link to="/checkout">proceed to checkout</Link>
-          </button>
+          <Link to="/checkout">
+            <button className="btn checkout-btn">proceed to checkout</button>
+          </Link>
         ) : (
           <button className="btn login-btn" onClick={() => loginWithRedirect()}>
             login
