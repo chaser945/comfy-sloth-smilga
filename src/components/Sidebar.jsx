@@ -1,5 +1,5 @@
 import { links } from "../utils/constants"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import styled from "styled-components"
 import NavIcons from "./NavIcons"
 import { useProductsContext } from "../context/productsContext"
@@ -14,19 +14,39 @@ const Sidebar = () => {
           {links.map((link) => {
             const { id, text, url } = link
             return (
-              <Link key={id} to={url}>
+              <NavLink
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "active-nav-link"
+                    : isPending
+                    ? "pending-nav-link"
+                    : ""
+                }
+                key={id}
+                to={url}
+              >
                 <li className="nav-link" onClick={toggleSidebar}>
                   {text}
                 </li>
-              </Link>
+              </NavLink>
             )
           })}
           {myUser && (
-            <Link key="checkout" to="/checkout">
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isActive
+                  ? "active-nav-link"
+                  : isPending
+                  ? "pending-nav-link"
+                  : ""
+              }
+              key="checkout"
+              to="/checkout"
+            >
               <li className="nav-link" onClick={toggleSidebar}>
                 checkout
               </li>
-            </Link>
+            </NavLink>
           )}
         </ul>
         <NavIcons />
@@ -77,6 +97,10 @@ const SidebarWrapper = styled.div`
 
   .nav-icons-wrapper {
     font-weight: 600;
+  }
+  .active-nav-link {
+    border-bottom: 3px solid var(--clr-dark-grunge);
+    padding-bottom: 0.2em;
   }
 
   @media (min-width: 950px) {

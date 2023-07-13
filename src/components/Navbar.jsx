@@ -4,6 +4,7 @@ import { links } from "../utils/constants"
 import NavIcons from "./NavIcons"
 import { useProductsContext } from "../context/productsContext"
 import { useUserContext } from "../context/UserContext"
+import { NavLink } from "react-router-dom"
 
 const Navbar = () => {
   const { showSidebar, toggleSidebar } = useProductsContext()
@@ -23,15 +24,35 @@ const Navbar = () => {
           {links.map((link) => {
             const { id, text, url } = link
             return (
-              <Link key={id} to={url}>
-                <li>{text}</li>
-              </Link>
+              <NavLink
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? "active-nav-link"
+                    : isPending
+                    ? "pending-nav-link"
+                    : ""
+                }
+                key={id}
+                to={url}
+              >
+                <li className="nav-link">{text}</li>
+              </NavLink>
             )
           })}
           {myUser && (
-            <Link key="checkout" to="/checkout">
-              <li>checkout</li>
-            </Link>
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isActive
+                  ? "active-nav-link"
+                  : isPending
+                  ? "pending-nav-link"
+                  : ""
+              }
+              key="checkout"
+              to="/checkout"
+            >
+              <li className="nav-link">checkout</li>
+            </NavLink>
           )}
         </ul>
         <NavIcons />
@@ -55,6 +76,10 @@ const NavContainer = styled.nav`
     align-items: center;
     padding: 0 1em;
     // background-color: magenta;
+  }
+
+  .nav-link {
+    font-weight: 600;
   }
 
   .logo {
@@ -98,6 +123,11 @@ const NavContainer = styled.nav`
 
   .nav-icons-wrapper {
     display: none;
+  }
+
+  .active-nav-link {
+    border-bottom: 3px solid var(--clr-dark-grunge);
+    padding-bottom: 0.2em;
   }
 
   @media (min-width: 950px) {

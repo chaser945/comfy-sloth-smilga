@@ -30,7 +30,12 @@ export default Checkout
 const Wrapper = styled.section`
   min-height: calc(100vh - 10rem);
   .empty-cart {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    // background-color: magenta;
   }
 
   .empty-h1 {

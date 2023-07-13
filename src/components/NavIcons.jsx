@@ -13,7 +13,7 @@ const NavIcons = () => {
       <div className="nav-icons">
         <Link to="/cart">
           <span className="cart" onClick={toggleSidebar}>
-            <p>cart</p>
+            <p className="nav-link">cart</p>
             <i className="fa-solid fa-cart-shopping"></i>
 
             <span className="cart-items-num">{totalItems}</span>
@@ -29,7 +29,7 @@ const NavIcons = () => {
               logout({ logoutParams: { returnTo: window.location.origin } })
             }}
           >
-            <p>logout</p>
+            <p className="nav-link">logout</p>
             <img className="logout-pic" src={user.picture} alt={user.name} />
           </span>
         ) : (
@@ -40,7 +40,7 @@ const NavIcons = () => {
               loginWithRedirect()
             }}
           >
-            <p>login</p>
+            <p className="nav-link">login</p>
             <i className="fa-solid fa-user-plus"></i>
           </span>
         )}
@@ -54,6 +54,10 @@ const NavIconsWrapper = styled.div`
   .nav-icons {
     display: flex;
     gap: 1.5em;
+  }
+
+  .nav-link {
+    font-weight: 600;
   }
 
   .nav-icons {
