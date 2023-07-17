@@ -15,6 +15,8 @@ const GridProducts = ({ filteredProducts }) => {
         behavior: "auto",
         block: "center",
       })
+    } else {
+      window.scrollTo(0, 0)
     }
   }, [])
   return (

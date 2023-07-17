@@ -16,6 +16,8 @@ const ListProducts = ({ filteredProducts }) => {
         block: "center",
       })
       setMarkerItem("")
+    } else {
+      window.scrollTo(0, 0)
     }
   }, [])
   return (
