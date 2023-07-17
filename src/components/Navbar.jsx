@@ -11,30 +11,30 @@ import { useEffect } from "react"
 const Navbar = () => {
   const { showSidebar, toggleSidebar } = useProductsContext()
   const { myUser } = useUserContext()
-  const [showNav, setShowNav] = useState(true)
-  const [yPos, setYPos] = useState(0)
+  // const [showNav, setShowNav] = useState(true)
+  // const [yPos, setYPos] = useState(0)
 
-  const handleScroll = () => {
-    // console.log("scrolling")
-    if (typeof window !== undefined) {
-      if (window.scrollY - 2 > yPos) {
-        setShowNav(false)
-        // console.log("scrolling down")
-      } else {
-        setShowNav(true)
-      }
-      setYPos(window.scrollY - 2)
-    }
-  }
+  // const handleScroll = () => {
+  //   // console.log("scrolling")
+  //   if (typeof window !== undefined) {
+  //     if (window.scrollY - 2 > yPos) {
+  //       setShowNav(false)
+  //       // console.log("scrolling down")
+  //     } else {
+  //       setShowNav(true)
+  //     }
+  //     setYPos(window.scrollY - 2)
+  //   }
+  // }
 
-  useEffect(() => {
-    if (typeof window !== undefined) {
-      window.addEventListener("scroll", handleScroll)
-      return () => window.removeEventListener("scroll", handleScroll)
-    }
-  }, [yPos])
+  // useEffect(() => {
+  //   if (typeof window !== undefined) {
+  //     window.addEventListener("scroll", handleScroll)
+  //     return () => window.removeEventListener("scroll", handleScroll)
+  //   }
+  // }, [yPos])
   return (
-    <NavContainer className={`nav-bar ${!showNav && "hidden"}`}>
+    <NavContainer className={`nav-bar`}>
       <div className="nav-center section">
         <Link to="/">
           <h1 className="logo">Shop Local</h1>
