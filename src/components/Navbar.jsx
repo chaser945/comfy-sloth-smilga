@@ -159,9 +159,9 @@ const NavContainer = styled.nav`
     }
   }
 
-  // @media (max-width: 400px) {
-  //   .logo {
-  //     margin: 0.5em;
-  //   }
-  // }
+  @media (max-width: 400px) {
+    .logo {
+      margin: 0.5em;
+    }
+  }
 `
