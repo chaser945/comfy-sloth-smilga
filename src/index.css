@@ -104,7 +104,7 @@ input:focus {
 }
 
 .nav-bar {
-  position: fixed;
+  position: sticky;
   z-index: 999;
   left: 0;
   right: 0;
