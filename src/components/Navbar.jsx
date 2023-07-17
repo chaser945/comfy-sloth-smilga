@@ -5,12 +5,36 @@ import NavIcons from "./NavIcons"
 import { useProductsContext } from "../context/productsContext"
 import { useUserContext } from "../context/UserContext"
 import { NavLink } from "react-router-dom"
+import { useState } from "react"
+import { useEffect } from "react"
 
 const Navbar = () => {
   const { showSidebar, toggleSidebar } = useProductsContext()
   const { myUser } = useUserContext()
+  const [showNav, setShowNav] = useState(true)
+  const [yPos, setYPos] = useState(0)
+
+  const handleScroll = () => {
+    // console.log("scrolling")
+    if (typeof window !== undefined) {
+      if (window.scrollY > yPos) {
+        setShowNav(false)
+        // console.log("scrolling down")
+      } else {
+        setShowNav(true)
+      }
+      setYPos(window.scrollY)
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      window.addEventListener("scroll", handleScroll)
+      return () => window.removeEventListener("scroll", handleScroll)
+    }
+  }, [yPos])
   return (
-    <NavContainer>
+    <NavContainer className={`nav-bar ${!showNav && "hidden"}`}>
       <div className="nav-center section">
         <Link to="/">
           <h1 className="logo">Shop Local</h1>
@@ -63,19 +87,11 @@ const Navbar = () => {
 export default Navbar
 
 const NavContainer = styled.nav`
-  position: relative;
-  z-index: 999;
-  left: 0;
-  right: 0;
-  top: 0;
-  // background-color: red;
-
   .nav-center {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1em;
-    // background-color: magenta;
   }
 
   .nav-link {
@@ -140,6 +156,12 @@ const NavContainer = styled.nav`
     }
     .nav-icons-wrapper {
       display: block;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .logo {
+      margin: 0.5em;
     }
   }
 `
