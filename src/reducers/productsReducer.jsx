@@ -6,6 +6,7 @@ import {
   SINGLE_PRODUCT_FETCH_BEGIN,
   SINGLE_PRODUCT_FETCH_SUCCESS,
   SINGE_PRODUCT_FETCH_ERROR,
+  SET_MARKER_ITEM,
 } from "../actions"
 
 const productsReducer = (state, action) => {
@@ -54,6 +55,13 @@ const productsReducer = (state, action) => {
       ...state,
       singleProductLoading: false,
       singleProductError: true,
+    }
+  }
+
+  if (action.type === SET_MARKER_ITEM) {
+    return {
+      ...state,
+      markerItem: action.payload.id,
     }
   }
 

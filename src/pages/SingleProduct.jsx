@@ -31,6 +31,10 @@ const SingleProduct = () => {
   }, [])
 
   useEffect(() => {
+    window.scrollTo(0, 300)
+  }, [singleProduct])
+
+  useEffect(() => {
     if (singleProductError) {
       const timeOutId = setTimeout(() => {
         navigate("/")

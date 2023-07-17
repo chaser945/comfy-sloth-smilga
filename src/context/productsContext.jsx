@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from "react"
+import { createContext, useContext, useReducer, useEffect, useRef } from "react"
 import {
   TOGGLE_SIDEBAR,
   PRODUCTS_FETCH_BEGIN,
@@ -7,6 +7,7 @@ import {
   SINGLE_PRODUCT_FETCH_BEGIN,
   SINGLE_PRODUCT_FETCH_SUCCESS,
   SINGE_PRODUCT_FETCH_ERROR,
+  SET_MARKER_ITEM,
 } from "../actions"
 import reducer from "../reducers/productsReducer"
 import axios from "axios"
@@ -22,10 +23,17 @@ const initialState = {
   singleProductLoading: false,
   singleProductError: false,
   singleProduct: {},
+  markerItem: "",
 }
 
 const ProductsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
+
+  const restorationRef = useRef(null)
+
+  const setMarkerItem = (id) => {
+    dispatch({ type: SET_MARKER_ITEM, payload: { id } })
+  }
 
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR })
@@ -68,7 +76,13 @@ const ProductsProvider = ({ children }) => {
 
   return (
     <ProductsContext.Provider
-      value={{ ...state, toggleSidebar, fetchSingleProduct }}
+      value={{
+        ...state,
+        toggleSidebar,
+        fetchSingleProduct,
+        restorationRef,
+        setMarkerItem,
+      }}
     >
       {children}
     </ProductsContext.Provider>

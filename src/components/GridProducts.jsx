@@ -2,17 +2,36 @@ import styled from "styled-components"
 import { formatPrice } from "../utils/helpers"
 import { Link } from "react-router-dom"
 import { FaSearch } from "react-icons/fa"
+import { useProductsContext } from "../context/productsContext"
+import { useEffect } from "react"
 
 const GridProducts = ({ filteredProducts }) => {
   // console.log(filteredProducts)
+  const { markerItem, setMarkerItem, restorationRef } = useProductsContext()
+
+  useEffect(() => {
+    if (markerItem) {
+      restorationRef.current.scrollIntoView({
+        behavior: "auto",
+        block: "center",
+      })
+    }
+  }, [])
   return (
     <Wrapper>
       <div className="grid-products">
         {filteredProducts.map((product) => {
           const { image, name, price, id } = product
           return (
-            <Link to={`/products/${id}`} key={id}>
-              <article className="grid-article">
+            <Link
+              to={`/products/${id}`}
+              key={id}
+              onClick={() => setMarkerItem(id)}
+            >
+              <article
+                className="grid-article"
+                ref={markerItem === id ? restorationRef : null}
+              >
                 <div className="grid-content">
                   <p className="grid-title">{name}</p>
                   <p className="grid-price">{formatPrice(price)}</p>

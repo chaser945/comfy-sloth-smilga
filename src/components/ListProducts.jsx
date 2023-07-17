@@ -1,23 +1,41 @@
 import styled from "styled-components"
 import { formatPrice } from "../utils/helpers"
 import { Link } from "react-router-dom"
+import { useProductsContext } from "../context/productsContext"
+import { useEffect } from "react"
+import { Auth0Context } from "@auth0/auth0-react"
 
 const ListProducts = ({ filteredProducts }) => {
-  console.log(filteredProducts)
+  // console.log(filteredProducts)
+  const { restorationRef, markerItem, setMarkerItem } = useProductsContext()
+
+  useEffect(() => {
+    if (markerItem) {
+      restorationRef.current.scrollIntoView({
+        behavior: "auto",
+        block: "center",
+      })
+      setMarkerItem("")
+    }
+  }, [])
   return (
     <Wrapper>
       <div className="list-products">
         {filteredProducts.map((product) => {
           const { name, image, price, description, id } = product
           return (
-            <article className="list-article" key={id}>
+            <article
+              className="list-article"
+              key={id}
+              ref={markerItem === id ? restorationRef : null}
+            >
               <div className="list-content">
                 <h3 className="list-title">{name}</h3>
                 <p className="list-price">{formatPrice(price)}</p>
                 <p className="list-description">
                   {description.substring(0, 150)}...
                 </p>
-                <Link to={`/products/${id}`}>
+                <Link to={`/products/${id}`} onClick={() => setMarkerItem(id)}>
                   <button className="btn btn-list-details">details</button>
                 </Link>
               </div>
