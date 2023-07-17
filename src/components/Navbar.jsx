@@ -17,13 +17,13 @@ const Navbar = () => {
   const handleScroll = () => {
     // console.log("scrolling")
     if (typeof window !== undefined) {
-      if (window.scrollY > yPos) {
+      if (window.scrollY - 2 > yPos) {
         setShowNav(false)
         // console.log("scrolling down")
       } else {
         setShowNav(true)
       }
-      setYPos(window.scrollY)
+      setYPos(window.scrollY - 2)
     }
   }
 
