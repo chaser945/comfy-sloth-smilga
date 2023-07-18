@@ -109,7 +109,7 @@ input:focus {
   left: 0;
   right: 0;
   top: 0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  box-shadow: var(--shadow-light);
   background-color: white;
   transition: var(--transition);
 }
