@@ -1,7 +1,10 @@
 import styled from "styled-components"
 import greenSofa from "../assets/green-sofa.jpg"
+import greenSofaTiny from "../assets/tiny/green_sofa_tiny.jpg"
 import coffeeTable from "../assets/coffee-table.jpg"
+import coffeeTableTiny from "../assets/tiny/coffee_table_tiny.jpg"
 import { Link } from "react-router-dom"
+import ProgressiveImage from "react-progressive-graceful-image"
 const HomeHero = () => {
   return (
     <Wrapper>
@@ -23,8 +26,25 @@ const HomeHero = () => {
           </Link>
         </div>
         <div className="img-wrapper">
-          <img className="green-sofa" src={greenSofa} alt="nice table" />
-          <img className="coffee-table" src={coffeeTable} alt="nice table" />
+          {/* <img className="green-sofa" src={greenSofa} alt="nice table" /> */}
+          <ProgressiveImage src={greenSofa} placeholder={greenSofaTiny}>
+            {(src, loading) => (
+              <img
+                className={`green-sofa ${loading ? "loading" : "loaded"}`}
+                src={src}
+                alt="nice table"
+              />
+            )}
+          </ProgressiveImage>
+          <ProgressiveImage src={coffeeTable} placeholder={coffeeTableTiny}>
+            {(src, loading) => (
+              <img
+                className={`coffee-table ${loading ? "loading" : "loaded"}`}
+                src={src}
+                alt="coffee table"
+              />
+            )}
+          </ProgressiveImage>
         </div>
       </div>
     </Wrapper>
@@ -60,6 +80,7 @@ const Wrapper = styled.section`
     max-width: 450px;
     max-height: 500px;
     object-fit: cover;
+    transition: all ease-in-out 0.2s;
   }
 
   .coffee-table {
@@ -69,7 +90,13 @@ const Wrapper = styled.section`
     object-fit: cover;
     bottom: 0;
     left: -70px;
+    transition: all ease-in-out 0.2s;
   }
+  /* .coffee-table.loading,
+  .green-sofa.loading {
+    filter: blur(3px);
+    clip-path: inset(0);
+  } */
 
   .coffee-table,
   .green-sofa {

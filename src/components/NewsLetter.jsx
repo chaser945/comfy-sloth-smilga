@@ -50,7 +50,7 @@ const Wrapper = styled.section`
   }
 
   .email-input {
-    border: 2px solid var(--clr-dark-gray);
+    border: 1px solid var(--clr-dark-gray);
     border-radius: 5px 0 0 5px;
     padding: 0.5em;
     flex-grow: 2;
@@ -58,7 +58,7 @@ const Wrapper = styled.section`
   }
 
   .subscribe-btn {
-    border: 2px solid var(--clr-dark-gray);
+    border: 1px solid var(--clr-dark-gray);
     border-radius: 0 5px 5px 0;
   }
 

@@ -7,6 +7,7 @@ import { useUserContext } from "../context/UserContext"
 import { NavLink } from "react-router-dom"
 import { useState } from "react"
 import { useEffect } from "react"
+import Logo from "./Logo"
 
 const Navbar = () => {
   const { showSidebar, toggleSidebar } = useProductsContext()
@@ -36,9 +37,7 @@ const Navbar = () => {
   return (
     <NavContainer className={`nav-bar`}>
       <div className="nav-center section">
-        <Link to="/">
-          <h1 className="logo">Shop Local</h1>
-        </Link>
+        <Logo />
         <div className="hamburger-wrapper" onClick={toggleSidebar}>
           <div className={`bar bar-one ${showSidebar && "active"}`}></div>
           <div className={`bar bar-second ${showSidebar && "active"}`}></div>
@@ -96,12 +95,6 @@ const NavContainer = styled.nav`
 
   .nav-link {
     font-weight: 600;
-  }
-
-  .logo {
-    font-family: "Righteous", sans-serif;
-    color: var(--clr-dark-gray);
-    font-size: 2rem;
   }
 
   .hamburger-wrapper {

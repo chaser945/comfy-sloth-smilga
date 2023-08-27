@@ -1,13 +1,24 @@
 import { PageHero } from "../components"
 import styled from "styled-components"
+import tableImgTiny from "../assets/tiny/table_furniture_tiny.jpg"
 import tableImg from "../assets/table-furniture.jpg"
+import ProgressiveImage from "react-progressive-graceful-image"
 const About = () => {
   return (
     <main>
       <PageHero title="About" />
       <Wrapper>
         <div className="section about-page">
-          <img className="table-img" src={tableImg} alt="nice table" />
+          {/* <img className="table-img" src={tableImgTiny} alt="nice table" /> */}
+          <ProgressiveImage src={tableImg} placeholder={tableImgTiny}>
+            {(src, loading) => (
+              <img
+                className={`table-img ${loading ? "loading" : "loaded"}`}
+                src={src}
+                alt="table"
+              />
+            )}
+          </ProgressiveImage>
           <div className="about-content">
             <h1 className="about-title">Our Story</h1>
             <div className="underline"></div>

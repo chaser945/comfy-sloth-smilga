@@ -17,6 +17,7 @@ import ListProducts from "./ListProducts"
 import PrivateRouteCheckout from "./PrivateRouteCheckout"
 import LoadingSpin from "./LoadingSpin"
 import StripeCheckOut from "./StripeCheckout"
+import Logo from "./Logo"
 
 export {
   Navbar,
@@ -38,4 +39,5 @@ export {
   PrivateRouteCheckout,
   LoadingSpin,
   StripeCheckOut,
+  Logo,
 }
